@@ -1,0 +1,59 @@
+.navbar-brand{
+    background-image: url(../images/ahri.jpg);
+    width: 50px;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.comment{
+    overflow: auto;
+}
+
+.send{
+    font-size: 22px;
+    float: right;
+}
+
+.top, .middle, .bottom{
+    position: fixed;
+    top: 150px;
+    left: 0;
+    width: 30px;
+    height: 40px;
+    background: #ccc;
+    opacity: 0.7;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.top{
+    top: 350px;
+    background-image: url(../images/dir_up.png);
+}
+
+.top:hover{
+    opacity: 1;
+    background-image: url(../images/dir_up.png);
+}
+
+/*.middle{*/
+    /*top: 392px;*/
+    /*background-image: url(../images/dir_right.png);*/
+/*}*/
+
+/*.middle:hover{*/
+    /*opacity: 1;*/
+    /*background-image: url(../images/dir_right.png);*/
+/*}*/
+
+.bottom{
+    top: 392px;
+    background-image: url(../images/dit_down.png);
+}
+
+.bottom:hover{
+    opacity: 1;
+    background-image: url(../images/dit_down.png);
+}

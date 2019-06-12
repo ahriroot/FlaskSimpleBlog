@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+
+{% block title %}AHRI - 被你发现了{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="{{ url_for('static', filename='js/jQueryRotate.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="face">
+            <div class="search-box" style="padding-left: 100px">
+                <form id="form" action="{{ url_for('search') }}">
+                    <label>
+                        <span class="domain">myfsnow.com/</span>&nbsp;
+                        <input class="search" name="search" placeholder="你想了解什么  . . ." onkeypress="CheckInfo()">
+                    </label>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="row art_list">
+            {% for art in articles %}
+                <div class="col-xs-6"><a href="{{ url_for('info') }}?id={{ art.id }}">{{ art.art_name }}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+    <script>
+        function CheckInfo() {
+            if (event.keyCode == 13) {
+                $("#form").submit();
+            }
+        }
+    </script>
+{% endblock %}

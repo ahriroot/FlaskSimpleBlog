@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='ahri2.ico') }}" type="image/x-icon"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ url_for('index') }}">
+                    </a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">最新</a></li>
+                    {% if user %}
+                    <li><a href="{{ url_for('logout') }}">{{ user.username }}</a></li>
+                    {% else %}
+                    <li><a href="{{ url_for('login') }}">登录</a></li>
+                    <li><a href="{{ url_for('register') }}">注册</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br><br><br><br><br><br><br><br>
+    {% block main %}{% endblock %}
+</body>
+</html>

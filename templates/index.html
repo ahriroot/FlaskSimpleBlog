@@ -1,0 +1,61 @@
+{% extends 'base/base.html' %}
+
+{% block title %}AHRI - 被你发现了{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <script src="{{ url_for('static', filename='js/jQueryRotate.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
+
+{% block main %}
+    <br><br><br><br>
+<!-- --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-- -->
+    <div class="container">
+        <div class="face">
+            <div class="search-box" style="padding-left: 100px">
+                <form id="form" action="{{ url_for('search') }}" target="_blank">
+                    <label>
+                        <span class="domain">myfsnow.com/</span>&nbsp;
+                        <input class="search" name="search" placeholder="你想了解什么  . . ." onkeypress="CheckInfo()">
+                    </label>
+                </form>
+            </div>
+        </div>
+<!-- --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-- -->
+        <div class="row art-name">
+            <div class="col-xs-6">
+                <div class="left">
+                    {% for art in articles %}
+                    <div><a class="art" href="javascript:void(0)" onclick="toInfo({{ art.id }})">{{ art.art_name }}</a></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="right">
+                    {% for cate in categories %}
+                    <div><a class="art" href="javascript:void(0)" onclick="toCate({{ cate.id }})">{{ cate.cate_name }}</a></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="down"><img id="more" src="/static/images/down.png" alt=""></div>
+<!-- --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-- --><br><br>
+        <div class="row" id="art_by_cate">
+
+        </div>
+    </div>
+<!-- --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-- --><br><br>
+    <div class="up"><img src="{{ url_for('static', filename='images/up.png') }}" alt=""></div>
+    <div class="send"><img src="{{ url_for('static', filename='images/send.png') }}" alt="">留言</div><br><br><br>
+<!-- --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-- -->
+    <div class="footer">
+
+    </div>
+<!-- --*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-- -->
+    <script>
+        $(function () {
+            toCate({{ id }});
+        });
+    </script>
+{% endblock %}

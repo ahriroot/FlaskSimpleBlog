@@ -1,0 +1,73 @@
+{% extends 'base/adbase.html' %}
+
+{% block title %}AHRI - 修改文章{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" style="z-index: 10"><br>
+        <div class="row" style="margin-left: 220px;margin-right: 10px">
+            <div class="col-xs-12 form-group">
+                <label  for="cate">分类</label>
+                <select id="cate" class="form-control">
+                    {% for c in cate %}
+                        {% if art.cate_id == c.id %}
+                            <option value="{{ c.id }}" selected = "selected">{{ c.cate_name }}</option>
+                        {% else %}
+                            <option value="{{ c.id }}">{{ c.cate_name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <br>
+            <div class="col-xs-12 form-group">
+                <label for="name">文章名</label>
+                <input id="name" class="form-control" type="text" value="{{ art.art_name }}" placeholder="Name">
+            </div>
+            <br>
+            <div class="col-xs-12 form-group">
+                <label for="desc">描述</label>
+                <textarea id="desc" class="form-control">{{ art.describe }}</textarea>
+            </div>
+            <br>
+            <div class="col-xs-12">
+                <div id="editor">
+
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <button onclick="update()">提交</button>
+            </div>
+        </div>
+        <input id="id" type="hidden" value="{{ art.id }}">
+        <textarea id="content" hidden>{{ art.content }}</textarea>
+    </div>
+    <script type="text/javascript">
+        var E = window.wangEditor;
+        var editor = new E('#editor');
+        editor.customConfig.uploadImgServer = '/static/';
+        editor.customConfig.uploadFileName = 'FileName';
+        // editor.customConfig.uploadImgParams = {
+        //     csrfmiddlewaretoken: document.getElementById('csrf_token').value
+        // };
+        editor.create();
+        editor.txt.html($('#content').val());
+        function update() {
+            $.post('/modify_art/',{
+                id: $('#id').val(),
+                cate_id: $('#cate').val(),
+                art_name: $('#name').val(),
+                describe: $('#desc').val(),
+                content: editor.txt.html(),
+            }, function(data) {
+                if(data == 'ok'){
+                    alert('提交成功');
+                    a('article');
+                }else{
+                    alert('提交失败');
+                }
+            });
+        }
+    </script>
+{% endblock %}

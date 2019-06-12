@@ -1,0 +1,51 @@
+{% extends 'base/adbase.html' %}
+
+{% block title %}AHRI - 系统信息{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" style="z-index: 10"><br>
+        <div class="row" style="margin-left: 220px;margin-right: 10px">
+            <div class="col-xs-12">
+                <table class="table table-condensed">
+                    <tr>
+                        <th>用户名</th>
+                        <th>级别</th>
+                        <th>删除</th>
+                    </tr>
+                    {% for user in users %}
+                    <tr>
+                        <td class="col-xs-2">{{ user.username }}</td>
+                        {% if user.leave == -1 %}
+                        <td class="col-xs-2">超级管理员</td>
+                        {% elif user.leave == 0 %}
+                        <td class="col-xs-2">普通用户</td>
+                        {% endif %}
+                        <td class="col-xs-2"><button class="btn btn-danger" onclick="del_user({{ user.id }})">删 除</button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function del_user(val) {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg)==true){
+                $.post('/del_user/',{id: val }, function(data) {
+                if(data == 'ok'){
+                    alert('删除成功');
+                    a('mar_user');
+                }else{
+                    alert('删除失败');
+                }
+            });
+            }else{
+                return false;
+            }
+        }
+    </script>
+{% endblock %}

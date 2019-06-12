@@ -1,0 +1,11 @@
+<div class="title">
+    <h1>{{ article.art_name }}</h1>
+</div>
+<div class="info">
+    <h3> Write&nbsp;&nbsp;&nbsp;&nbsp;by&nbsp;&nbsp;&nbsp;&nbsp;{{ username }}&nbsp;&nbsp;&nbsp;&nbsp;{{ article.time|time }}</h3>
+</div>
+<br><br><br>
+<div class="content">
+    {{ article.content|safe }}
+</div>
+<div class="foot"></div>

@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+
+{% block title %}AHRI - 被你发现了{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+    <br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-6">
+                <form action="{{ url_for('register') }}" method="POST">
+                    <div class="form-group">
+                        <label for="username">用 户 名:</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">密&nbsp;&nbsp;&nbsp;&nbsp;码:</label>
+                        <input type="password" class="form-control" id="password1" name="password1" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">确认密码:</label>
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="confirm password">
+                    </div>
+                    <input type="submit" class="btn btn-default" value="注&nbsp;&nbsp;&nbsp;&nbsp;册" style="width: 100%;font-size: 25px">
+                </form>
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+    </div>
+{% endblock %}

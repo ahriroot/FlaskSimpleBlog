@@ -1,0 +1,167 @@
+.navbar-brand{
+    background-image: url(../images/ahri.jpg);
+    width: 50px;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.navbar-right{
+    margin-right: 35px;
+}
+
+.face{
+    height: 150px;
+    /*line-height: 300px;*/
+    text-align: center;
+    position:relative;
+}
+
+.search-box{
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.domain{
+    font-size: 40px;
+    font-weight: bold;
+    padding-top: 25px;
+}
+
+.search{
+    border: 0;
+    height: 50px;
+    font-size: 24px;
+    width: 260px;
+}
+
+.art-name{
+    overflow: hidden;
+}
+
+.left{
+    padding-right: 35px;
+}
+
+.right{
+    padding-left: 35px;
+}
+
+.left a{
+    max-width: 100%;
+    float: right;
+    color: #888;
+    font-size: 16px;
+    font-weight: 600;
+    clear:both;
+    margin: 5px;
+}
+
+.right a{
+    max-width: 100%;
+    float: left;
+    color: #888;
+    font-size: 16px;
+    font-weight: 600;
+    clear:both;
+    margin: 5px;
+}
+
+.right a:hover, .left a:hover{
+    color: #333;
+}
+
+.list{
+    text-align: center;
+}
+
+.art-list{
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+}
+
+.down{
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    text-align: center;
+}
+
+.down img{
+    max-width: 80%;
+    margin: auto;
+}
+
+.next{
+    height: 40px;
+    width: 40px;
+    margin: auto;
+    text-align: center;
+}
+
+.next img{
+    max-width: 70%;
+    margin: auto;
+}
+
+.down img:hover{
+    background: #ccc;
+}
+
+.up{
+    height: 30px;
+    width: 45px;
+    background: #ccc;
+    position: fixed;
+    bottom: 0;
+    right: 90px;
+    text-align: center;
+    line-height: 30px;
+}
+
+.up:hover{
+    background: #999;
+}
+
+.up img{
+    max-width: 40%;
+}
+
+.send{
+    height: 30px;
+    width: 60px;
+    background: #ccc;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: '华文行楷';
+}
+
+.send:hover{
+    background: #999;
+}
+
+.send img{
+    max-width: 36%;
+}
+
+.footer{
+    width: 100%;
+    height: 60px;
+    background: #ebebeb;
+}
+
+.art_list{
+     text-align: center;
+}
+
+.art_list a{
+     font-size: 18px;
+    color: #333;
+}

@@ -1,0 +1,11 @@
+.navbar-brand{
+    background-image: url(../images/ahri.jpg);
+    width: 50px;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.navbar-right{
+    margin-right: 35px;
+}

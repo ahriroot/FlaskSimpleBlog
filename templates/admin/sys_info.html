@@ -1,0 +1,38 @@
+{% extends 'base/adbase.html' %}
+
+{% block title %}AHRI - 系统信息{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" style="z-index: 10"><br>
+        <div class="row" style="margin-left: 220px;margin-right: 10px">
+            <div class="col-xs-12">
+                <table class="table table-condensed" border="1">
+                    <tr>
+                        <td class="col-xs-2 td">系 统</td>
+                        <td class="col-xs-6 td">{{ uname.system }}&nbsp;&nbsp;{{ uname.release }}&nbsp;&nbsp;{{ uname.version }}</td>
+                    </tr>
+                    <tr>
+                        <td>主机名</td>
+                        <td>{{ uname.node }}</td>
+                    </tr>
+                    <tr>
+                        <td>架 构</td>
+                        <td>{{ uname.machine }}</td>
+                    </tr>
+                    <tr>
+                        <td>CPU</td>
+                        <td>{{ uname.processor }}</td>
+                    </tr>
+                    <tr>
+                        <td>Flask</td>
+                        <td>{{ info }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'base/base.html' %}
+
+{% block title %}AHRI - 被你发现了{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/info.css') }}">
+    <script src="{{ url_for('static', filename='js/info.js') }}"></script>
+    <script src="{{ url_for('static', filename='wang/wangEditor.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='wang/wangEditor.min.css') }}">
+{% endblock %}
+
+{% block main %}
+    <div class="container" id="app">
+        <div class="row">
+            <div class="col-xs-1 hidden-xs"></div>
+            <div class="col-xs-8" id="content">
+
+            </div>
+            <div class="col-xs-3">
+                <br><br><br><br><br>
+                <ol style="font-size: 20px">
+                    {% for art in articles %}
+                        <li>
+                            <a href="javascript:void(0)" onclick="on_click({{ art.id }})">{{ art.art_name }}</a>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+        <hr>
+        <br><br><br>
+        <div class="row" id="other">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-8">
+                <h3>别人说:</h3>
+                <div class="comment">
+
+                </div>
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <div class="row" id="my">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-8">
+                <h3>我要说:</h3>
+                <div id="editor">
+
+                </div>
+                <br>
+                <button class="send btn btn-success" onclick="send({{ id }})">发 送</button>
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+        <br><br><br>
+<!-- ========================================================================== -->
+        <div class="hidden-xs">
+            <div class="top"><a id="top" href="javascript:void(0)"></a></div>
+{#            <div class="middle"><a href="javascript:void(0)"></a></div>#}
+            <div class="bottom"><a href="javascript:void(0)"></a></div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+    <script type="text/javascript">
+        var E = window.wangEditor;
+        var editor = new E('#editor');
+        editor.customConfig.uploadImgServer = '/upload/';
+        editor.customConfig.uploadFileName = 'FileName';
+        // editor.customConfig.uploadImgParams = {
+        //     csrfmiddlewaretoken: document.getElementById('csrf_token').value
+        // };
+        editor.customConfig.menus = [
+            'bold',  // 粗体
+            'fontSize',  // 字号
+            'fontName',  // 字体
+            'italic',  // 斜体
+            'underline',  // 下划线
+            'strikeThrough',  // 删除线
+            'foreColor',  // 文字颜色
+            'backColor',  // 背景颜色
+            'emoticon',  // 表情
+            'code',  // 插入代码
+            'undo',  // 撤销
+            'redo'  // 重复
+        ];
+        editor.create();
+    </script>
+    <script src="{{ url_for('static', filename='js/vue.js') }}"></script>
+    <script>
+        $(function () {
+            get({{ id }});
+            $.get('/comment/',{
+                id: {{ id }},
+            }, function(d) {
+                $(".comment").html(d);
+            });
+        });
+    </script>
+{% endblock %}

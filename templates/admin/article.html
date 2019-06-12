@@ -1,0 +1,69 @@
+{% extends 'base/adbase.html' %}
+
+{% block title %}AHRI - 文章管理{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" style="z-index: 10"><br>
+        <div class="row" style="margin-left: 220px;margin-right: 10px">
+            <div class="col-xs-12 form-group">
+                <table class="table table-condensed">
+                    <tr>
+                        <th class="col-xs-2">名字</th>
+                        <th class="col-xs-2">分类</th>
+                        <th class="col-xs-4">描述</th>
+                        <th class="col-xs-1">作者</th>
+                        <th class="col-xs-1">修改</th>
+                        <th class="col-xs-1">删除</th>
+                        <th class="col-xs-1">评论</th>
+                    </tr>
+                    {% for art in articles %}
+                    <tr  class="success">
+                        <td>{{ art.art_name }}</td>
+                        <td>{{ art.cate_name }}</td>
+                        <td>{{ art.describe }}</td>
+                        {% for user in users %}
+                            {% if user.id == art.author %}
+                                <td>{{ user.username }}</td>
+                            {% else %}
+                            {% endif %}
+                        {% endfor %}
+                        <td><button class="btn btn-info" onclick="change({{ art.id }})">修改</button></td>
+                        <td><button class="btn btn-danger" onclick="del({{ art.id }})">删除</button></td>
+                        <td><button class="btn btn-success" onclick="comment({{ art.id }})">评论</button></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function del(val) {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg)==true){
+                $.post('/del_art/',{id: val }, function(data) {
+                if(data == 'ok'){
+                    alert('删除成功');
+                    a('article');
+                }else{
+                    alert('删除失败');
+                }
+            });
+            }else{
+                return false;
+            }
+        }
+        function change(val) {
+            $.get('/modify_art/?id=' + val, function(data) {
+                $('.main').html(data);
+            });
+        }
+        function comment(val) {
+            $.get('/mar_comment/?id=' + val, function(data) {
+                $('.main').html(data);
+            });
+        }
+    </script>
+{% endblock %}

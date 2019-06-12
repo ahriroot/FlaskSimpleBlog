@@ -1,0 +1,142 @@
+{% extends 'base/adbase.html' %}
+
+{% block title %}AHRI - 分类管理{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid" style="z-index: 10"><br>
+        <div class="row" style="margin-left: 220px">
+            <div class="col-xs-12">
+                <table class="table table-condensed">
+                    <tr class="tr" style="border-bottom: #333 solid 2px">
+                        <th class="col-xs-2">类名</th>
+                        <th class="col-xs-8">子类</th>
+                        <th class="col-xs-1">修改</th>
+                        <th class="col-xs-1">删除</th>
+                    </tr>
+                    {% for d in data %}
+                    <tr class="active" style="border-bottom: #333 solid 2px">
+                        <td style="border-right: #333 solid 2px">
+                            <input id="dcon_cate{{ d[0].id }}" type="hidden" value="{{ d[0].cate_name }}">
+                            <input id="dcate{{ d[0].id }}" class="form-control" style="text-align:center" type="text" value="{{ d[0].cate_name }}">
+                        </td>
+                        <td>
+                            <div class="col-xs-12">
+                                <table class="table table-condensed">
+                                    <tr class="tr">
+{#                                        <th class="col-xs-2">序号</th>#}
+                                        <th class="col-xs-7">类名</th>
+                                        <th class="col-xs-1">级别</th>
+                                        <th class="col-xs-2">修改</th>
+                                        <th class="col-xs-2">删除</th>
+                                    </tr>
+                                    {% for c in d[1] %}
+                                    <tr class="warning">
+                                        <td>
+                                            <input id="con_cate{{ c.id }}" type="hidden" value="{{ c.cate_name }}">
+                                            <input id="cate{{ c.id }}" class="form-control" style="text-align:center" type="text" value="{{ c.cate_name }}">
+                                        </td>
+                                        <td>
+                                            <input id="lcon_cate{{ c.id }}" type="hidden" value="{{ c.leave }}">
+                                            <input id="lcate{{ c.id }}" class="form-control" style="text-align:center" type="text" value="{{ c.leave }}">
+                                        </td>
+                                        <td><button class="btn btn-info" onclick="change({{ c.id }})">修 改</button></td>
+                                        <td><button class="btn btn-danger" onclick="del({{ c.id }})">删 除</button></td>
+                                    </tr>
+                                    {% endfor %}
+                                    <tr class="info">
+{#                                        <td>添加</td>#}
+                                        <td><input id="input{{ d[0].id }}" type="text" class="form-control"></td>
+                                        <td><input id="linput{{ d[0].id }}" type="text" class="form-control" value="1"></td>
+                                        <td colspan="2"><button class="btn btn-success" onclick="add({{ d[0].id }})">添 加</button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                        <td style="border-left: #333 solid 2px"><button class="btn btn-info" onclick="dchange({{ d[0].id }})">修 改</button></td>
+                        {% if d[1]|length == 0 %}
+                            <td><button class="btn btn-danger" onclick="del({{ d[0].id }})">删 除</button></td>
+                        {% else %}
+                            <td><button class="btn btn-default" disabled="disabled">删 除</button></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td>添加</td>
+                        <td><input id="par" type="text" class="form-control"></td>
+                        <td colspan="2"><button class="btn btn-success" onclick="add(0)">添 加</button></td>
+                   </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function add(val){
+            if(val == 0){
+                var name = $("#par").val();
+            }else{
+                var name = $("#input"+val).val();
+                var leave = $("#linput"+val).val();
+            }
+            $.post('/add_cate/',{name: name, pid: val,leave: leave }, function(data) {
+                if(data == 'ok'){
+                    alert('添加成功');
+                    a('category');
+                }else{
+                    alert('添加失败');
+                }
+            });
+        }
+        function del(val) {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg)==true){
+                $.post('/del_cate/',{id: val }, function(data) {
+                if(data == 'ok'){
+                    alert('删除成功');
+                    a('category');
+                }else{
+                    alert('删除失败');
+                }
+            });
+            }else{
+                return false;
+            }
+        }
+        function change(val) {
+            let con_cate = $("#con_cate"+val).val();
+            let cate = $("#cate"+val).val();
+            let lcon_cate = $("#lcon_cate"+val).val();
+            let leave = $("#lcate"+val).val();
+            if(con_cate == cate && lcon_cate == leave){
+                alert('没有改变');
+            }else{
+                $.post('/ch_cate/',{id: val, name: cate, leave: leave }, function(data) {
+                    if(data == 'ok'){
+                        alert('修改成功');
+                        a('category');
+                    }else{
+                        alert('修改失败');
+                    }
+                });
+            }
+        }
+        function dchange(val) {
+            let con_cate = $("#dcon_cate"+val).val();
+            let cate = $("#dcate"+val).val();
+            if(con_cate == cate){
+                alert('没有改变');
+            }else{
+                $.post('/ch_cate/',{id: val, name: cate }, function(data) {
+                    if(data == 'ok'){
+                        alert('修改成功');
+                        a('category');
+                    }else{
+                        alert('修改失败');
+                    }
+                });
+            }
+        }
+    </script>
+{% endblock %}
